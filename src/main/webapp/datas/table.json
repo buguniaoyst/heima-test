@@ -1,0 +1,52 @@
+{
+  "totalPage": 3,
+  "pageNumber": 1,
+  "list": [
+    {
+      "createTime": "2017-05-20 23:18:38",
+      "email": "110@qq.com",
+      "passWord": "1234",
+      "phone": "13333333333",
+      "userId":1,
+      "userType": "1",
+      "usingStatus": "0",
+      "zmIdCardImgUrl": "http://www.baidu.com"
+    }, {
+      "createTime": "2017-05-20 23:18:38",
+      "email": "110@qq.com",
+      "passWord": "1234",
+      "phone": "13333333333",
+      "userId":1,
+      "userType": "1",
+      "usingStatus": "0",
+      "zmIdCardImgUrl": "http://www.baidu.com"
+    }, {
+      "createTime": "2017-05-20 23:18:38",
+      "email": "110@qq.com",
+      "passWord": "1234",
+      "phone": "13333333333",
+      "userId":1,
+      "userType": "1",
+      "usingStatus": "0",
+      "zmIdCardImgUrl": "http://www.baidu.com"
+    }, {
+      "createTime": "2017-05-20 23:18:38",
+      "email": "110@qq.com",
+      "passWord": "1234",
+      "phone": "13333333333",
+      "userId":1,
+      "userType": "1",
+      "usingStatus": "0",
+      "myUrl": "http://www.baidu.com"
+    }, {
+      "createTime": "2017-05-20 23:18:38",
+      "email": "110@qq.com",
+      "passWord": "1234",
+      "phone": "13333333333",
+      "userId":1,
+      "userType": "1",
+      "usingStatus": "0",
+      "zmIdCardImgUrl": "http://www.baidu.com"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itcast.pro.dao.ModelMapper" >
+
+    <resultMap id="modelResultMap" type="Model" autoMapping="true">
+        <id column="id" property="id"></id>
+        
+        
+        <collection property="modelItems" javaType="ArrayList" ofType="ModelItem" autoMapping="true">
+            <id column="pid" property="id"></id>
+        </collection>
+        
+    </resultMap>
+
+    <select id="queryAllModel" resultMap="modelResultMap">
+        select * from t_model
+    </select>
+    <insert id="saveModel"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO t_model
+		(
+			id,
+			name,
+            status
+		)
+		VALUES
+		(
+			NULL,
+			#{name},
+			0
+		);
+	</insert>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itcast.pro.dao.ModelItemMapper" >
+
+<insert id="saveModelItem"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO t_model_item
+		(
+			id,
+			pid,
+            title,
+            content,
+            status,
+     	    courseorder
+		)
+		VALUES
+		(
+			NULL,
+			#{pid},
+			#{title},
+			#{content},
+			0,
+			1
+		);
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,96 @@
+{
+    "pagesize": 5,
+    "results": [
+        {
+            "id": 1,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 2,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 3,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 4,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 5,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 6,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 7,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 8,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 9,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 10,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        },
+        {
+            "id": 11,
+            "itemParmaId": "101",
+            "itemParam": "手机",
+            "itemParamDetail": "大屏，双摄像头",
+            "createDate": "2017-07-07",
+            "updateDate": "2017-07-07"
+        }
+       
+        
+    ],
+    "allpages": 3
+}

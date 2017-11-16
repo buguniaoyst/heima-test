@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css">
+    <script type="text/javascript" src="../lib/layui/layui.js"></script>
+</head>
+<body>
+    <div style="margin-top: 20px;margin-left: 20px" id="view">
+
+    </div>
+</body>
+<script type="text/javascript" src="../js/jfTable.js"></script>
+<script>
+
+    layui.config({
+        base: '../js/',
+        version:'1.0'
+    }).use(['jfTable','jquery'], function () {
+        var $=layui.jquery;
+        var config = {
+            url:"../datas/table.json",
+            page:true,
+            select:true,
+            columns: [ {
+                text:'用户名',
+                name: 'email',
+                width: 100
+            }, {
+                text:'密码',
+                name: 'password',
+                width: 150
+            }, {
+                text:'手机号码',
+                name: 'phone',
+                width: 150
+            }, {
+                text:'用户类型',
+                name: 'userType',
+                width: 150
+            }, {
+                text:'使用状态',
+                name: 'usingStatus',
+                width: 150
+            }, {
+                text:'链接地址',
+                name: 'zmIdCardImgUrl',
+                width: 150
+            }],
+            method:"post",
+            toolbarClass:"layui-btn-small",
+            toolbar:[
+                {
+                    text:"新增",
+                    icon:"",
+                    handle:function () {
+
+                    }
+                }
+            ]
+        }
+        $("#view").jfTable(config);
+    });
+</script>
+</html>
