@@ -8,16 +8,16 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 	<!-- 定义SqlSessionFactory -->
-	<!--<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"/>
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations" value="classpath:/mybatis/mappers/**/*.xml"/>
 		<property name="typeAliasesPackage" value="cn.itcast.pro.domain"/>
-	</bean>-->
+	</bean>
 	
 	<!-- 定义Mapper接口的扫描器 -->
-	<!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.itcast.pro.dao"/>
-	</bean>-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.heima.test.dao"/>
+	</bean>
 
 </beans>
