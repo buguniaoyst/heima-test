@@ -54,7 +54,7 @@ public class UserController {
     public String loginOut(HttpSession session){
         //销毁session
         session.invalidate();
-        return "redirect:/rest/page/login";
+        return "redirect:/rest/admin_login";
     }
 
 }

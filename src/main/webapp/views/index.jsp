@@ -25,7 +25,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
                         <img src="../../images/0.jpg" />
-                        <span style="color: #1aa094">您好!&nbsp; ${sessionScope.loginUser.name}，欢迎您登录！</span>
+                        <span style="color: #1aa094">您好!&nbsp; ${sessionScope.loginUser.username}，欢迎您登录！</span>
                     </a>
                 </li>
                 <li class="layui-nav-item">

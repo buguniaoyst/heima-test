@@ -11,6 +11,8 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String testid;
+
     @Id @GeneratedValue
     @Column(name="id", unique=true, nullable=false)
     public Integer getId() {
@@ -32,12 +34,11 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getTestid() {
+        return testid;
+    }
+
+    public void setTestid(String testid) {
+        this.testid = testid;
     }
 }

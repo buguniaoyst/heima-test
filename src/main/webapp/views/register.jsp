@@ -38,6 +38,7 @@
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form layui-form-pane">
                         <form method="post" action="/rest/user/regist" id = "registForm">
+                            <input type="hidden" name="testid" value="${param.testid}">
                             <div class="layui-form-item">
                                 <label for="L_email" class="layui-form-label">姓名</label>
                                 <div class="layui-input-inline">
