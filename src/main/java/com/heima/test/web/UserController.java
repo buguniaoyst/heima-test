@@ -2,6 +2,7 @@ package com.heima.test.web;
 
 import com.heima.test.domain.User;
 import com.heima.test.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import sun.swing.StringUIClientPropertyKey;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -25,7 +27,7 @@ public class UserController {
     @RequestMapping(value = "regist",method = RequestMethod.POST)
     public String regist(User user) {
         userService.save(user);
-        return "redirect:/views/login.jsp";
+        return "redirect:/views/login.jsp?testid="+user.getTestid();
     }
 
 
@@ -41,7 +43,12 @@ public class UserController {
         List<User> userList = userService.queryListByExample(user);
         if (null != userList && userList.size() > 0) {
             session.setAttribute("loginUser",userList.get(0));
-            return new ModelAndView("primary_test");
+            String testid = user.getTestid();
+            if(StringUtils.isNotBlank(testid) && testid.endsWith("0")){
+                return new ModelAndView("primary_test");
+            }else{
+                return new ModelAndView("senior_test");
+            }
         }
 
         return new ModelAndView("login","message","请输入正确的用户名和密码");

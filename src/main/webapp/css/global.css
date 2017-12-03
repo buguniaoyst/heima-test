@@ -115,7 +115,9 @@ body .layui-layout-admin .footer-demo{height: auto; padding: 5px 0; line-height:
 /* 辅助 */
 .site-tips{margin-bottom: 10px; padding: 15px; border-left: 5px solid #0078AD; background-color: #f2f2f2;}
 body .site-tips p{margin: 0;}
-
+.site-item{margin-bottom: 10px; padding: 15px; border-left: 5px solid #0078AD; background-color: #f2f2f2;}
+.site-item-param{margin-bottom: 15px;padding: 15px;
+    background-color: #eaeaf2;}
 /* 目录 */
 .site-dir{display: none;}
 .site-dir li{line-height: 26px; margin-left: 20px; overflow: visible; list-style-type: disc;}

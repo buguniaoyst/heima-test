@@ -6,11 +6,11 @@ var navs = [{
 		"title": "组卷管理",
 		"icon": "&#xe654;",
 		"href": "/rest/test_control"
-	}/*, {
-		"title": "问卷模板查询",
+	}, {
+		"title": "组卷列表",
 		"icon": "&#xe615;",
-		"href": "/rest/page/wenjuan_list"
-	}*/]
+		"href": "/rest/testctrl_list"
+	}]
 }, {
 	"title": "试卷管理",
 	"icon": "&#xe61d;",

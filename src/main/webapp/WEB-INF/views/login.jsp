@@ -26,6 +26,7 @@
                 <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">
             </div>
             <div class="layui-form-item">
+                <input type="hidden" name="testid" value="${param.testid}">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
                     <input type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked title="记住帐号">
