@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
-    <title>BOS物流项目进度跟踪</title>
+    <title>试卷管理列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css" media="all">
@@ -27,56 +27,22 @@
     <div class="layui-form" >
         <table class="layui-table" style="height: 58px;" lay-even="" lay-skin="row" id="personTable">
             <colgroup>
-                <col width="100">
-                <col width="100">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
-                <col width="60">
+                <col width="600">
+                <col width="400">
+                <col width="600">
+                <col width="400">
+                <col width="400">
             </colgroup>
             <thead>
             <tr>
 <%--
                 <th align="center"><input type="checkbox" id="layui-table-checkbox" name="id" lay-skin="primary" lay-filter="allChoose"></th>
 --%>
-                <th align="center"style="padding: 0;text-align: center">班级</th>
-                <th align="center">姓名</th>
-                <th align="center">1</th>
-                <th align="center">2</th>
-                <th align="center">3</th>
-                <th align="center">4</th>
-                <th align="center">5</th>
-                <th align="center">6</th>
-                <th align="center">7</th>
-                <th align="center">8</th>
-                <th align="center">9</th>
-                <th align="center">10</th>
-                <th align="center">11</th>
-                <th align="center">12</th>
-                <th align="center">13</th>
-                <th align="center">14</th>
-                <th align="center">15</th>
-                <th align="center">16</th>
-                <th align="center">17</th>
-                <th align="center">18</th>
-                <th align="center">19</th>
-                <th align="center">20</th>
+                <th align="center"style="padding: 0;text-align: center">班级名称</th>
+                <th align="center">班级类型</th>
+                <th align="center">试卷名称</th>
+                <th align="center">试卷状态</th>
+                <th align="center">查看详情</th>
             </tr>
             </thead>
             <tbody id="tbody">
@@ -87,6 +53,7 @@
     <!-- <div id="demo7" align="center"></div> -->
 </div>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/lib/jquery-1.8.3.js"></script>
 <script>
     layui.use(['laypage', 'layer','laydate','jquery','form'],function() {
         var laydate = layui.laydate;
@@ -117,16 +84,15 @@
 
             $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/json/pro_data.json",
+                url: "${pageContext.request.contextPath}/rest/test/scoreList",
                 //记得加双引号  T_T
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
                     nums = data.pagesize; //每页出现的数量
-                    pages = data.allpages; //总页数
                     pageData = data;
-                    //var pages = Math.ceil(data.length / nums); //得到总页数
+                    var pages = Math.ceil(data.results.length / nums); //得到总页数
                     //调用分页
                     laypage({
                         cont: 'demo5',
@@ -156,9 +122,6 @@
 
         })
 
-
-
-
         //分页数据
         var pageData ;
         var nums = 1; //每页出现的数量
@@ -173,25 +136,45 @@
             for (var i = (curr * nums - nums); i <= last; i++) {
                 // str += '<li>' + data[i] + '</li>';
                 var tr=$("<tr></tr>");
-                var td1 = $("<td align='center'>"+data[i].classname+"</td>")
-                var td2 = $("<td align='center'>"+data[i].name+"</td>");
+                var className;
+                var classType;
+                var testName;
+                var testId;
+                if (data[i].classTestNo == '0') {
+                    testName = "基础班开班考试试卷";
+
+                }else{
+                    testName = "就业班开班考试试卷";
+                }
+
+                if (data[i].classTestNo == '0') {
+                    classType = "基础班";
+
+                }else{
+                    classType = "就业班";
+                }
+
+                className = "上海黑马JavaEE"+classType+data[i].classNo+"期";
+                testId = data[i].classNo+data[i].classTestNo;
+                var td1 = $("<td align='center'>"+className+"</td>")
+                var td2 = $("<td align='center'>"+classType+"</td>");
+                var td3 = $("<td align='center'>"+testName+"</td>");
+                var td4 ;
+                if(data[i].testStatus == "开启"){
+                    td4 = $("<td align='center' >  <button class='layui-btn layui-btn-radius'  >已开启</button></td>");
+                }else{
+                    td4 = $("<td align='center' ><button  class='layui-btn layui-btn-warm layui-btn-radius' >已关闭</button></td>");
+                }
+                var td5 = $("<td align='center'><button class='layui-btn layui-btn-radius'  onclick='showScoreDetail("+testId+");'>查看详情</button></td>");
                 td1.appendTo(tr);
                 td2.appendTo(tr);
-                for(var j = 1 ;j<=20;j++){
-                    var index = 'day'+j;
-                    var td;
-                    if(data[i][index] == 1){
-                        td = $("<td align='center' style='background-color: #1aa094'>已完成</td>");
-                    }else{
-                        td = $("<td align='center' style='background-color: #F7B824'>未完成</td>");
-                    }
-                    td.appendTo(tr);
-                }
+                td3.appendTo(tr);
+                td4.appendTo(tr);
+                td5.appendTo(tr);
                 tr.appendTo(table);
             }
             return table;
         };
-
 
 
         /**
@@ -208,6 +191,14 @@
 
 
     });
+
+    //查看分数详情
+    function showScoreDetail(testid) {
+        //location.href = "${pageContext.request.contextPath}/rest/test/showScoreDetail?testId="+testid;
+        location.href = "${pageContext.request.contextPath}/rest/score_detail?testId="+testid;
+    }
+
+
 </script>
 </body>
 </html>

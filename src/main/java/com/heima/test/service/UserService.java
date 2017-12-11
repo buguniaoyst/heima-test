@@ -14,13 +14,29 @@ import java.util.List;
  */
 @Service("userService")
 public class UserService extends BaseService<User> {
-    @Autowired
-    private UserDao userDao;
+
 
     public List<User> queryListByExample(User user) {
         Example ex = new Example(User.class);
         ex.createCriteria().andEqualTo("username", user.getUsername())
                 .andEqualTo("password", user.getPassword());
-        return userDao.selectByExample(ex);
+        return this.getMapper().selectByExample(ex);
+    }
+
+    public User queryListByUserNameAndTestId(User user) {
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("username",user.getUsername())
+                .andEqualTo("testid",user.getTestid());
+        List<User> userList = this.getMapper().selectByExample(example);
+        if(null != userList && userList.size()>0){
+            return userList.get(0);
+        }
+        return null;
+    }
+
+    public List<User> queryListByTestId(User user) {
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("testid", user.getTestid());
+        return this.getMapper().selectByExample(example);
     }
 }

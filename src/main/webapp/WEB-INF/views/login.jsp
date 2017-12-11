@@ -12,7 +12,7 @@
         <h1>学员登录</h1>
     </header>
     <div class="beg-login-main">
-        <form action="/rest/user/login" id="loginForm" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
+        <form action="/rest/user/login" id="loginForm" class="layui-form" method="POST">
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe612;</i>
@@ -59,6 +59,12 @@
 
         if('${requestScope.message}') {
             layer.alert('${requestScope.message}', {
+                skin: 'layui-layer-molv' //样式类名
+                ,closeBtn: 0
+            });
+        }
+        if('${param.registMsg}') {
+            layer.alert('${param.registMsg}', {
                 skin: 'layui-layer-molv' //样式类名
                 ,closeBtn: 0
             });

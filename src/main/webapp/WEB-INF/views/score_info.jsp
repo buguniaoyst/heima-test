@@ -23,7 +23,7 @@
         <tbody>
         <tr>
             <th width="30%">试卷信息</th>
-            <td><span id="lbServerName">${testinfo}</span></td>
+            <td><span id="lbServerName">姓名：${user.username}||总分：${testinfo.totalScore}</span></td>
         </tr>
         </tbody>
     </table>

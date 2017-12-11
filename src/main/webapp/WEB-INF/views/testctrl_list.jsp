@@ -21,9 +21,9 @@
 <!-- 列表面板 -->
 <div class="layui-form-pane" style="margin-top: 15px;">
     <!-- 列表操作按钮组 -->
-    <div class="layui-form-item">
+   <%-- <div class="layui-form-item">
         <button id="exportbtn" class="layui-btn layui-btn-warm" lay-filter="exportpro">导出数据</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
+    </div>--%>
     <div class="layui-form" >
         <table class="layui-table" style="height: 58px;" lay-even="" lay-skin="row" id="personTable">
             <colgroup>
@@ -51,6 +51,7 @@
     <!-- <div id="demo7" align="center"></div> -->
 </div>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/lib/jquery-1.8.3.js"></script>
 <script>
     layui.use(['laypage', 'layer','laydate','jquery','form'],function() {
         var laydate = layui.laydate;
@@ -88,9 +89,8 @@
                 success: function (data) {
                     console.log(data);
                     nums = data.pagesize; //每页出现的数量
-                    pages = data.allpages; //总页数
                     pageData = data;
-                    //var pages = Math.ceil(data.length / nums); //得到总页数
+                    var pages = Math.ceil(data.results.length / nums); //得到总页数
                     //调用分页
                     laypage({
                         cont: 'demo5',
@@ -137,6 +137,7 @@
                 var className;
                 var classType;
                 var testName;
+                var testId;
                 if (data[i].classTestNo == '0') {
                     testName = "基础班开班考试试卷";
 
@@ -152,14 +153,15 @@
                 }
 
                 className = "上海黑马JavaEE"+classType+data[i].classNo+"期";
+                testId = data[i].classNo+data[i].classTestNo;
                 var td1 = $("<td align='center'>"+className+"</td>")
                 var td2 = $("<td align='center'>"+classType+"</td>");
                 var td3 = $("<td align='center'>"+testName+"</td>");
                 var td4 ;
                 if(data[i].testStatus == "开启"){
-                    td4 = $("<td align='center' >  <button class=\"layui-btn layui-btn-radius\">已开启</button></td>");
+                    td4 = $("<td align='center' >  <button class='layui-btn layui-btn-radius'  onclick='stopTest("+testId+");'>已开启</button></td>");
                 }else{
-                    td4 = $("<td align='center' ><button class=\"layui-btn layui-btn-warm layui-btn-radius\">已关闭</button></td>");
+                    td4 = $("<td align='center' ><button  class='layui-btn layui-btn-warm layui-btn-radius' onclick='startTest("+testId+");'>已关闭</button></td>");
                 }
                 td1.appendTo(tr);
                 td2.appendTo(tr);
@@ -185,6 +187,32 @@
 
 
     });
+
+    //关闭考试
+    function stopTest(testid) {
+        layer.alert('两次输入密码不一致，请重新输入', {
+            skin: 'layui-layer-molv' //样式类名
+            ,closeBtn: 0
+        });
+        //询问框
+        layer.confirm('确定要结束此次考试吗？', {
+            btn: ['结束','不结束'] ,//按钮
+            skin: 'layui-layer-molv'
+        }, function(){
+            location.href = "/rest/test/stopTest?testId="+testid;
+            layer.msg('的确很重要', {icon: 1});
+        }, function(){
+            layer.msg('暂时不结束', {
+                time: 20000, //20s后自动关闭
+                btn: ['明白了', '知道了']
+            });
+        });
+    }
+
+    //开启考试
+    function startTest(testid) {
+        alert(testid);
+    }
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import com.github.abel533.entity.Example;
 import com.github.abel533.mapper.Mapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.heima.test.domain.TestCtrl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -136,6 +137,7 @@ public abstract class BaseService<T> {
      * @return
      */
     public Integer updateSelectiveById(T t){
+
         return this.getMapper().updateByPrimaryKeySelective(t);
     }
 
@@ -160,6 +162,7 @@ public abstract class BaseService<T> {
     public Integer deleteById(Integer id){
         return this.getMapper().deleteByPrimaryKey(id);
     }
+
 
 
 }

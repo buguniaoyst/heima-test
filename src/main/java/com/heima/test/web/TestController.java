@@ -10,8 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -33,11 +35,19 @@ public class TestController {
     @RequestMapping("addTest")
     public ModelAndView addTest(TestCtrl testInfo) {
         System.out.println("test testAdd");
-        testInfo.setTestId(testInfo.getClassType()+testInfo.getClassNo()+testInfo.getClassTestNo());
+        testInfo.setTestId(testInfo.getClassNo()+testInfo.getClassTestNo());
+        ModelAndView md = new ModelAndView("test_info");
+        md.addObject("testinfo","本班的局域网ip+/rest/register.jsp?testid="+testInfo.getClassNo()+testInfo.getClassTestNo());
+        //保存之前根据testid做幂等
+        TestCtrl exitTestCtrl = testService.queryListByExample(testInfo);
+        if(null != exitTestCtrl){
+            //将试卷开启
+            exitTestCtrl.setTestStatus("开启");
+           testService.updateSelectiveById(exitTestCtrl);
+            return md;
+        }
         testInfo.setTestStatus("开启");
         testService.saveTestInfo(testInfo);
-        ModelAndView md = new ModelAndView("test_info");
-        md.addObject("testinfo","本班的局域网ip+/views/register.jsp?testid="+testInfo.getClassType()+testInfo.getClassNo()+testInfo.getClassTestNo());
         return md;
     }
 
@@ -46,7 +56,7 @@ public class TestController {
     @ResponseBody
     public Map<String, Object> listTest() {
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        List<TestCtrl> testCtrls = testService.queryAll();
+        List<TestCtrl> testCtrls = testService.queryOrderByTestStatus();
         resultMap.put("pagesize", 10);
         resultMap.put("results", testCtrls);
         return  resultMap;
@@ -89,7 +99,63 @@ public class TestController {
     }
 
 
+    @RequestMapping("stopTest")
+    public String stopTest(TestCtrl testCtrl) {
+        //根据testid查询对应的试卷
+        TestCtrl testCtrl1 = testService.queryOne(testCtrl);
+        if(null != testCtrl1){
+            testCtrl.setId(testCtrl1.getId());
+            testCtrl.setTestStatus("已关闭");
+            testService.updateSelectiveById(testCtrl);
+        }
+        return "redirect:/rest/testctrl_list";
+    }
+
+    @RequestMapping("startTest")
+    public String startTest(TestCtrl testCtrl) {
+        //根据testid查询对应的试卷
+        TestCtrl testCtrl1 = testService.queryOne(testCtrl);
+        if(null != testCtrl1){
+            testCtrl.setId(testCtrl1.getId());
+            testCtrl.setTestStatus("开启");
+            testService.updateSelectiveById(testCtrl);
+        }
+        return "redirect:/rest/testctrl_list";
+    }
 
 
+    @RequestMapping(value = "scoreList")
+    @ResponseBody
+    public Map<String, Object> getFinishedTest(){
+        TestCtrl testCtrl = new TestCtrl();
+        testCtrl.setTestStatus("已关闭");
+        List<TestCtrl> testCtrlList = testService.queryFinishedTestByExample(testCtrl);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("pagesize", 10);
+        resultMap.put("results", testCtrlList);
+        return resultMap;
+    }
+
+    @RequestMapping(value = "showScoreDetail")
+    @ResponseBody
+    public Map<String, Object> showScoreDetail(TestCtrl testCtrl){
+        TestInfo testInfo = new TestInfo();
+        testInfo.setTestid(testCtrl.getTestId());
+        List<TestInfo> testInfoList = testInfoService.queryListByExample(testInfo);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("pagesize", 50);
+        resultMap.put("results", testInfoList);
+        return resultMap;
+    }
+
+
+    @RequestMapping(value = "exportScoreList",method = RequestMethod.POST)
+    public ModelAndView exportScoreListByTestid(TestCtrl testCtrl) {
+        TestInfo testInfo = new TestInfo();
+        testInfo.setTestid(testCtrl.getTestId());
+        ModelAndView mv = new ModelAndView("excelView");
+        mv.addObject("scoreList",testInfoService.queryListByExample(testInfo));
+        return mv;
+    }
 
 }

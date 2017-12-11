@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "testctrl")
 public class TestCtrl {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", unique=true, nullable=false)
     private Integer id;
     private String testId;
     private  String classType;
@@ -13,9 +16,7 @@ public class TestCtrl {
     private String classTestNo;
     private  String testStatus;
 
-    @Id
-    @GeneratedValue
-    @Column(name="id", unique=true, nullable=false)
+
     public Integer getId() {
         return id;
     }
