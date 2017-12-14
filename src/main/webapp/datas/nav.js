@@ -1,19 +1,19 @@
 var navs = [{
-	"title": "系统设置",
+	"title": "用户管理",
 	"icon": "&#xe614;",
 	"spread": true,
 	"children": [{
-        "title": "用户管理",
-        "icon": "&#xe654;",
+        "title": "新增用户",
+        "icon": "&#xe612;",
         "href": "/rest/user_control"
     }, {
         "title": "用户列表",
-        "icon": "&#xe615;",
+        "icon": "&#xe613;",
         "href": "/rest/userctrl_List"
     }]
-}, {
+},{
 	"title": "考试管理",
-	"icon": "&#xe61d;",
+	"icon": "&#xe620;",
 	"spread": false,
 	"children": [ {
         "title": "组卷管理",
@@ -23,15 +23,20 @@ var navs = [{
         "title": "组卷列表",
         "icon": "&#xe615;",
         "href": "/rest/testctrl_list"
-    },{
-		"title": "JavaEE基础阶段开班考试试卷",
-		"icon": "&#xe63c;",
-		"href": "/rest/primary_test"
-	}, {
-		"title": "JavaEE就业阶段开班考试试卷",
-		"icon": "&#xe63c;",
-		"href": "/rest/senior_test"
-	}]
+    }]
+},{
+    "title": "试卷资源",
+    "icon": "&#xe61d;",
+    "spread": false,
+    "children": [{
+        "title": "JavaEE基础班开班考试试卷",
+        "icon": "&#xe63c;",
+        "href": "/rest/primary_test"
+    }, {
+        "title": "JavaEE就业阶段开班考试试卷",
+        "icon": "&#xe63c;",
+        "href": "/rest/senior_test"
+    }]
 }, {
 	"title": "成绩管理",
 	"icon": "&#xe629;",
@@ -44,7 +49,7 @@ var navs = [{
 	}]
 }, {
     "title": "带班经验沉淀",
-    "icon": "&#xe629;",
+    "icon": "&#xe642;",
     "href": "",
     "spread": false,
     "children": [  {
@@ -62,17 +67,25 @@ var navs = [{
     "href": "",
     "spread": false,
     "children": [  {
-        "title": "创建题目",
+        "title": "新增题目",
         "icon": "&#xe60a;",
-        "href": "/rest/study_add"
+        "href": "/rest/item_add"
     }, {
         "title": "题库列表",
         "icon": "&#xe60a;",
-        "href": "/rest/testctrl_scoreList"
+        "href": "/rest/item_list"
+    }, {
+        "title": "组卷管理",
+        "icon": "&#xe60a;",
+        "href": "/rest/item_test_add"
+    }, {
+        "title": "随堂试卷列表",
+        "icon": "&#xe60a;",
+        "href": "/rest/test_source_list"
     }, {
         "title": "安排测试",
         "icon": "&#xe60a;",
-        "href": "/rest/testctrl_scoreList"
+        "href": "/rest/item_test_create"
     }]
 }, {
 	"title": "其他",

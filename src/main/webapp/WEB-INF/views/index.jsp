@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>黑马程序员考试系统</title>
+    <title>黑马程序员辅助系统</title>
     <link rel="stylesheet" type="text/css" href="../../lib/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="../../css/global.css">
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
@@ -16,7 +16,7 @@
 
             <div class="admin-login-box">
                 <a class="logo" style="left: 0;" href="">
-                    <span style="font-size: 18px;font-family:Verdana, Geneva, sans-serif">黑马程序员考试系统</span>
+                    <span style="font-size: 18px;font-family:Verdana, Geneva, sans-serif">黑马程序员辅助系统</span>
                 </a>
             </div>
             <!--水平导航-->

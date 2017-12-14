@@ -28,9 +28,10 @@
         <table class="layui-table" style="height: 58px;" lay-even="" lay-skin="row" id="personTable">
             <colgroup>
                 <col width="40">
-                <col width="600">
+                <col width="400">
                 <col width="400">
                 <col width="600">
+                <col width="200">
             </colgroup>
             <thead>
             <tr>
@@ -38,8 +39,9 @@
                 <th align="center"><input type="checkbox" id="layui-table-checkbox" name="id" lay-skin="primary" lay-filter="allChoose"></th>
 --%>
                 <th align="center"style="padding: 0;text-align: center">序号</th>
-                <th align="center">用户名</th>
-                <th align="center">角色</th>
+                <th align="center">适用班级</th>
+                <th align="center">题型</th>
+                <th align="center">题干</th>
                 <th align="center">操作</th>
             </tr>
             </thead>
@@ -79,10 +81,9 @@
         //页面初始化的时候加载分页数据
         $(function(){
             //alert("页面初始化了.......");
-
             $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/rest/user/userList",
+                url: "${pageContext.request.contextPath}/rest/item/showItemDetail?testItems=${param.itemids}",
                 //记得加双引号  T_T
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -108,14 +109,7 @@
                 }
             });
 
-            //根据助教姓名查询 查询
-            $("#searchBtn").click(function(){
-                //墨绿深蓝风
-                layer.alert('不想写了，你自己写吧.....', {
-                    skin: 'layui-layer-molv' //样式类名
-                    ,closeBtn: 0
-                });
-            });
+
 
 
         })
@@ -134,16 +128,42 @@
             for (var i = (curr * nums - nums); i <= last; i++) {
                 // str += '<li>' + data[i] + '</li>';
                 var tr=$("<tr></tr>");
-                var usertype ;
+                var classType;
+                var itemType;
+                var itemContent;
+
+                if(data[i].classType == '0'){
+                    classType = '基础班';
+                }else{
+                    classType = '就业班';
+                }
+
+
+                if (data[i].itemType == '0') {
+                    itemType = "选择题";
+                }else if(data[i].itemType == '1'){
+                    itemType = "编程题";
+                }else if(data[i].itemType == '2'){
+                    itemType = "填空题";
+                }else if(data[i].itemType == '3'){
+                    itemType = "判断题";
+                }else{
+                    itemType = "其他";
+                }
+
+                itemContent = data[i].itemContent;
+
 
                 var td1 = $("<td align='center'>"+i+"</td>")
-                var td2 = $("<td align='center'>"+data[i].username+"</td>");
-                var td3 = $("<td align='center'>"+data[i].usertype+"</td>");
-                var td4 = $("<td align='center' ><button  class='layui-btn  layui-btn-radius' >编辑</button></td>");
+                var td2 = $("<td align='center'>"+classType+"</td>");
+                var td3 = $("<td align='center'>"+itemType+"</td>");
+                var td4 = $("<td align='center'>"+itemContent+"</td>");
+                var td5 = $("<td align='center' ><button  class='layui-btn  layui-btn-radius' >编辑</button></td>");
                 td1.appendTo(tr);
                 td2.appendTo(tr);
                 td3.appendTo(tr);
                 td4.appendTo(tr);
+                td5.appendTo(tr);
                 tr.appendTo(table);
             }
             return table;

@@ -11,6 +11,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String classid;
     private String testid;
     private String usertype = "普通用户";
 
@@ -33,6 +34,14 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getClassid() {
+        return classid;
+    }
+
+    public void setClassid(String classid) {
+        this.classid = classid;
     }
 
     public String getUsertype() {

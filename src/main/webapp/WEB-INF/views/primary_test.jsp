@@ -16,7 +16,10 @@
                 <span style="font-size: large">JavaEE基础班开班考试试卷...</span>
             </div>
             本试卷是JAVA基础班入学考试试卷，主要考察JAVA基础前五天大家在入学之前掌握的一个整体情况，本试卷共有40道题，其中有30道是单选，有10道题是多选题，希望大家认真对待
-           <div>
+
+
+
+            <div>
                <div class="site-title">
                    <fieldset><legend><a >第一题</a></legend></fieldset>
                </div>
@@ -477,7 +480,7 @@
                     <fieldset><legend><a >第十三题</a></legend></fieldset>
                 </div>
                 <div class="site-item">
-                    关于运算符的说法正确的是;
+                    关于运算符的说法不正确的是;
                 </div>
                 <div class="site-item-param">
                     <div id='qwe' class='matrix'>
@@ -567,7 +570,7 @@
                         <span style='font-size: 25px'>
                             <input type="checkbox"  name="q15" value="B" title="B">
                         </span>
-                            <lable>sy的值是6</lable>
+                            <lable>y的值是6</lable>
                         </div>
                         <div >
                         <span style='font-size: 25px'>

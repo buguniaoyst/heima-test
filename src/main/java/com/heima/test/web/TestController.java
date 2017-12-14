@@ -5,6 +5,7 @@ import com.heima.test.domain.TestInfo;
 import com.heima.test.domain.User;
 import com.heima.test.service.TestInfoService;
 import com.heima.test.service.TestService;
+import com.heima.test.utils.CommonUtils;
 import com.heima.test.utils.ScoreUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import sun.misc.Request;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -33,11 +35,12 @@ public class TestController {
     private TestInfoService testInfoService;
 
     @RequestMapping("addTest")
-    public ModelAndView addTest(TestCtrl testInfo) {
+    public ModelAndView addTest(TestCtrl testInfo, HttpServletRequest request) {
         System.out.println("test testAdd");
         testInfo.setTestId(testInfo.getClassNo()+testInfo.getClassTestNo());
         ModelAndView md = new ModelAndView("test_info");
-        md.addObject("testinfo","本班的局域网ip+/rest/register.jsp?testid="+testInfo.getClassNo()+testInfo.getClassTestNo());
+        String ipAddr = CommonUtils.getIpAddress(request);
+        md.addObject("testinfo",ipAddr+"/rest/register.jsp?classid="+testInfo.getClassNo()+testInfo.getClassTestNo());
         //保存之前根据testid做幂等
         TestCtrl exitTestCtrl = testService.queryListByExample(testInfo);
         if(null != exitTestCtrl){
@@ -71,7 +74,7 @@ public class TestController {
             return new ModelAndView("login","message","请输入正确的用户名和密码");
         }
         //获取testid
-        String testid = user.getTestid();
+        String testid = user.getClassid();
         Double score = null;
         if(StringUtils.isNotBlank(testid)){
             if(testid.endsWith("0")){
@@ -82,11 +85,11 @@ public class TestController {
         }
         testInfo.setTotalScore(score);
         testInfo.setUsername(user.getUsername());
-        testInfo.setTestid(user.getTestid());
+        testInfo.setTestid(user.getClassid());
         //防止重复提交
         TestInfo testInfoParam = new TestInfo();
         testInfoParam.setUsername(user.getUsername());
-        testInfoParam.setTestid(user.getTestid());
+        testInfoParam.setTestid(user.getClassid());
         List<TestInfo> testInfos = testInfoService.queryListByWhere(testInfoParam);
         ModelAndView mv = new ModelAndView("score_info");
         mv.addObject("user", user);

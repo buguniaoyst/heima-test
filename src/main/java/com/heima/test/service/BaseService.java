@@ -36,7 +36,7 @@ public abstract class BaseService<T> {
      * @param id
      * @return
      */
-    public T queryById(Long id) {
+    public T queryById(String id) {
         return getMapper().selectByPrimaryKey(id);
     }
 
@@ -151,6 +151,18 @@ public abstract class BaseService<T> {
         Example example = new Example(clazz);
         example.createCriteria().andIn("id", values);
         return this.getMapper().deleteByExample(example);
+    }
+
+    /**
+     * 根据ids查询数据
+     * @param clazz
+     * @param values
+     * @return
+     */
+    public List<T> queryByIds(Class<?> clazz,List<Object> values){
+        Example example = new Example(clazz);
+        example.createCriteria().andIn("id", values);
+        return this.getMapper().selectByExample(example);
     }
 
     /**

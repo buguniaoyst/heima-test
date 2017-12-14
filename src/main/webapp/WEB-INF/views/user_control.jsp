@@ -20,13 +20,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" id="password" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                    <input type="password" name="password" id="password" required  lay-verify="required"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="repwd" id="repwd" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                    <input type="password" name="repwd" id="repwd" required  lay-verify="required"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">

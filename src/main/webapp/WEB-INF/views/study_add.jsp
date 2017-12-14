@@ -22,7 +22,7 @@
 <div class="layui-form-pane" style="margin-top: 15px;">
     <form class="layui-form layui-form-pane" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">长输入框</label>
+            <label class="layui-form-label">班级名称</label>
             <div class="layui-input-block">
                 <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
             </div>
@@ -145,13 +145,6 @@
         var laypage = layui.laypage;
         var form = layui.form();
         var $ = layui.jquery;
-
-
-
-
-
-
-
 
     });
 </script>

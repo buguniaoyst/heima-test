@@ -35,13 +35,13 @@ public class UserController {
     @RequestMapping(value = "regist",method = RequestMethod.POST)
     public String regist(User user) {
         //根据用户名和testid做幂等
-        User exitUser = userService.queryListByUserNameAndTestId(user);
+        User exitUser = userService.queryListByUserNameAndClassid(user);
         if(null != exitUser){
-            return "redirect:/rest/login.jsp?testid="+user.getTestid()+"&registMsg=you have registed,please login on now!";
+            return "redirect:/rest/login.jsp?classid="+user.getClassid()+"&registMsg=you have registed,please login on now!";
         }
 
         userService.save(user);
-        return "redirect:/rest/login.jsp?testid="+user.getTestid();
+        return "redirect:/rest/login.jsp?classid="+user.getClassid();
     }
 
 
@@ -65,15 +65,28 @@ public class UserController {
             session.setAttribute("loginUser",userList.get(0));
             String userType = userList.get(0).getUsertype();
             if(StringUtils.isNotBlank(userType) && "管理员".equals(userType)){
-                return new ModelAndView("index");
+                return new ModelAndView("redirect:/rest/index");
             }
+
+
+            //如果学员信息中既有classid又有testid则根据testid安排测试
+            if(StringUtils.isNotBlank(userList.get(0).getTestid()) && StringUtils.isNotBlank(userList.get(0).getClassid())){
+               //重定向到测试页面
+                return new ModelAndView("redirect:/rest/stu_test_detail");
+            }
+
+
+
+
+
+
             //根据testid查询试卷
             TestCtrl testCtrl = new TestCtrl();
-            String testid = userList.get(0).getTestid();
-            testCtrl.setTestId(testid);
+            String classid = userList.get(0).getClassid();
+            testCtrl.setTestId(classid);
             TestCtrl exitTestCtrl =  testService.queryListByExample(testCtrl);
             if(null != exitTestCtrl && "开启".equals(exitTestCtrl.getTestStatus())){
-                if(StringUtils.isNotBlank(testid) && testid.endsWith("0")){
+                if(StringUtils.isNotBlank(classid) && classid.endsWith("0")){
                     return new ModelAndView("primary_test");
                 }else{
                     return new ModelAndView("senior_test");
@@ -101,11 +114,11 @@ public class UserController {
 
     @RequestMapping(value = "addUser",method = RequestMethod.POST)
     public String addUser(User user) {
-        user.setTestid("000");
-        //根据用户名和testid做幂等
-        User exitUser = userService.queryListByUserNameAndTestId(user);
+        user.setClassid("000");
+        //根据用户名和classid做幂等
+        User exitUser = userService.queryListByUserNameAndClassid(user);
         if(null != exitUser){
-            return "redirect:/rest/login.jsp?testid="+user.getTestid()+"&registMsg=you have registed,please login on now!";
+            return "redirect:/rest/login.jsp?classid="+user.getClassid()+"&registMsg=you have registed,please login on now!";
         }
         if("1".equals(user.getUsertype())){
             user.setUsertype("管理员");
@@ -123,8 +136,8 @@ public class UserController {
        
         Map<String,Object> resultMap = new HashMap<>();
         User user = new User();
-        user.setTestid("000");
-        List<User> userList = userService.queryListByTestId(user);
+        user.setClassid("000");
+        List<User> userList = userService.queryListByClassid(user);
         resultMap.put("pagesize", 20);
         resultMap.put("results", userList);
         return resultMap;
