@@ -10,24 +10,21 @@ import java.util.List;
 @Service
 @Transactional
 public class ClassInfoService extends  BaseService<ClassInfo>{
-    public ClassInfo queryClassInfoByExample(ClassInfo classInfo) {
+
+    public ClassInfo queryClassInfoByClassId(ClassInfo classInfo) {
         Example example = new Example(ClassInfo.class);
         example.createCriteria().andEqualTo("classId", classInfo.getClassId());
         List<ClassInfo> classInfoList = this.getMapper().selectByExample(example);
         if(null != classInfoList && classInfoList.size()>0){
             return classInfoList.get(0);
         }
-        return  null;
+        return null;
     }
 
-    public ClassInfo queryClassInfoByClassIdAndTestId(ClassInfo classInfo) {
+
+    public void updatClassInfoByClassId(ClassInfo classInfo) {
         Example example = new Example(ClassInfo.class);
-        example.createCriteria().andEqualTo("classId", classInfo.getClassId())
-                .andEqualTo("testId", classInfo.getTestId());
-        List<ClassInfo> classInfoList = this.getMapper().selectByExample(example);
-        if(null != classInfoList && classInfoList.size()>0){
-            
-        }
-        return null;
+        example.createCriteria().andEqualTo("classId", classInfo.getClassId());
+        this.getMapper().updateByExampleSelective(classInfo, example);
     }
 }

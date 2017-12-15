@@ -127,7 +127,7 @@
         $(function () {
             $("#submitTest").click(function () {
                 //获取提交的答案信息
-
+                alert(123);
             })
         })
 

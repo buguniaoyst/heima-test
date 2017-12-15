@@ -54,9 +54,15 @@ public class TestSourceController {
     public String createTestForStudent(ClassInfo classInfo) {
         System.out.println(classInfo);
         //根据classid和testid做幂等
-        ClassInfo exitClassInfo = this.classInfoService.queryClassInfoByClassIdAndTestId(classInfo);
-        classInfoService.save(classInfo);
-        return "redirect:/rest/show_test_source?classId="+classInfo.getClassId();
+        ClassInfo exitClassInfo = this.classInfoService.queryClassInfoByClassId(classInfo);
+        if (exitClassInfo == null) {
+            //新增
+            classInfoService.save(classInfo);
+        }else{
+            //更具classId更新
+            classInfoService.updatClassInfoByClassId(classInfo);
+        }
+        return "redirect:/rest/show_test_source?classId=" + classInfo.getClassId();
     }
 
 
@@ -64,7 +70,7 @@ public class TestSourceController {
     @ResponseBody
     public Map<String, Object> queryTestSourceByClassNo(ClassInfo classInfo) {
         //获取classinfo
-        ClassInfo classInfo1 = this.classInfoService.queryClassInfoByExample(classInfo);
+        ClassInfo classInfo1 = this.classInfoService.queryClassInfoByClassId(classInfo);
 
         TestSource testSource = testSourceService.queryByTestId(classInfo1.getTestId());
         Map<String, Object> result = new HashMap<>();
